@@ -5,6 +5,7 @@ plugins {
     //TODO: improve hilt dependency. defining it through gradle catalog is not working
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -60,6 +61,15 @@ dependencies {
     //TODO: improve hilt dependency. defining it through gradle catalog is not working
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
+    implementation(libs.okhttp)
+    implementation(libs.retrofitcore)
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.okhttp.logging)
+
 }
 
 kapt {
