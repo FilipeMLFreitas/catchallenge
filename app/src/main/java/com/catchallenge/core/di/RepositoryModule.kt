@@ -25,6 +25,7 @@ object RepositoryModule {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 chain.request().newBuilder()
+                    //TODO: actually, the auth method of the repository shouldn't be knowledge of such a top level place such as this. need to find a way to have the TheCatApiRepository set it somehow
                     //TODO: move api key out (yes, i know this shouldn't be commited, but time is of the essence..)
                     .addHeader(
                         "x-api-key",
