@@ -1,7 +1,7 @@
 package com.catchallenge.core.di
 
 import com.catchallenge.repository.CatRepository
-import com.catchallenge.repository.thecatapi.TheCatApiRepository
+import com.catchallenge.repository.thecatapi.TheCatApiRepositoryV1
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,7 +44,7 @@ object RepositoryModule {
     fun provideCatRepository(
         @TheCatApiOkHttpClient okHttpClient: OkHttpClient
     ): CatRepository {
-        return TheCatApiRepository("https://api.thecatapi.com/v1/", okHttpClient)
+        return TheCatApiRepositoryV1("https://api.thecatapi.com/v1/", okHttpClient)
     }
 }
 

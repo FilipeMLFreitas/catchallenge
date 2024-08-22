@@ -2,10 +2,12 @@ package com.catchallenge.repository.thecatapi
 
 import com.catchallenge.model.Breed
 import com.catchallenge.repository.CatRepository
-import com.catchallenge.repository.retrofit.RetrofitApiBuilder
+import com.catchallenge.repository.thecatapi.mapping.BreedMapping
+import com.catchallenge.repository.thecatapi.mapping.mapAll
+import com.catchallenge.repository.thecatapi.util.RetrofitApiBuilder
 import okhttp3.OkHttpClient
 
-class TheCatApiRepository(
+class TheCatApiRepositoryV1(
     private val baseUrl: String,
     private val okHttpClient: OkHttpClient?,
 ) :
@@ -19,11 +21,7 @@ class TheCatApiRepository(
     }
 
     override suspend fun getBreeds(): List<Breed> {
-
-        val list = api.getBreeds()
-
-        //TODO: mapping to app model
-
-        return emptyList()
+        val daoList = api.getBreeds()
+        return BreedMapping.mapAll(daoList)
     }
 }

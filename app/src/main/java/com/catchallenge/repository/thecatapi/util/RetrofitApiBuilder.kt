@@ -1,4 +1,4 @@
-package com.catchallenge.repository.retrofit
+package com.catchallenge.repository.thecatapi.util
 
 
 import kotlinx.serialization.ExperimentalSerializationApi

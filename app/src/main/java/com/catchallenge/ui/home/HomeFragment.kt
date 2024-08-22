@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.catchallenge.databinding.FragmentHomeBinding
+import com.catchallenge.model.Breed
+import com.catchallenge.utils.launchLifecycleAware
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,15 +31,43 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        launchLifecycleAware {
+            homeViewModel.homeStateFlow.collect()
+            {
+                handleState(it)
+            }
         }
+
+        homeViewModel.getBreeds()
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleState(state: HomeState) {
+        when (state) {
+            HomeState.Loading -> setUiLoading()
+            HomeState.NoData -> setUiNoData()
+            HomeState.Error -> setUiError()
+            is HomeState.BreedList -> setUiData(state.breedList)
+        }
+    }
+
+    private fun setUiLoading() {
+    }
+
+    private fun setUiNoData() {
+    }
+
+    private fun setUiError() {
+
+    }
+
+    private fun setUiData(list: List<Breed>) {
+
     }
 }

@@ -1,11 +1,11 @@
 package com.catchallenge.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.catchallenge.repository.CatRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,14 +13,19 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val catRepository: CatRepository,
 ) : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _homeStateFlow: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
+    val homeStateFlow = _homeStateFlow.asStateFlow()
 
     fun getBreeds() {
         viewModelScope.launch {
-            catRepository.getBreeds()
+            try {
+                val breedList = catRepository.getBreeds()
+                val state =
+                    if (breedList.isEmpty()) HomeState.NoData else HomeState.BreedList(breedList)
+                _homeStateFlow.emit(state)
+            } catch (_: Exception) {
+                _homeStateFlow.emit(HomeState.Error)
+            }
         }
     }
 }
