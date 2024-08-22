@@ -2,6 +2,7 @@ package com.catchallenge.repository.thecatapi.mapping
 
 import com.catchallenge.model.Breed
 import com.catchallenge.repository.thecatapi.dao.BreedDao
+import com.catchallenge.repository.util.Mapper
 
 object BreedMapping : Mapper<BreedDao, Breed> {
     override fun map(from: BreedDao): Breed {

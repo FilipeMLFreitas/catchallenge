@@ -86,6 +86,13 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    //TODO: use ksp instead, and move version to the catalog
+    kapt("androidx.room:room-compiler:2.6.1")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
 }
 
 kapt {

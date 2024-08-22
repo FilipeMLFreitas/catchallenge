@@ -1,4 +1,4 @@
-package com.catchallenge.repository.thecatapi.mapping
+package com.catchallenge.repository.util
 
 fun interface Mapper<in From, out To> {
     fun map(from: From): To

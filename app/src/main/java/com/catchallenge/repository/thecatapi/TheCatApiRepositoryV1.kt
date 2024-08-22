@@ -3,8 +3,8 @@ package com.catchallenge.repository.thecatapi
 import com.catchallenge.model.Breed
 import com.catchallenge.repository.CatRepository
 import com.catchallenge.repository.thecatapi.mapping.BreedMapping
-import com.catchallenge.repository.thecatapi.mapping.mapAll
 import com.catchallenge.repository.thecatapi.util.RetrofitApiBuilder
+import com.catchallenge.repository.util.mapAll
 import okhttp3.OkHttpClient
 
 class TheCatApiRepositoryV1(

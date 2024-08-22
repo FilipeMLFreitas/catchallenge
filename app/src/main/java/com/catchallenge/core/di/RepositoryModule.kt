@@ -1,12 +1,15 @@
 package com.catchallenge.core.di
 
+import android.content.Context
 import com.catchallenge.repository.CatRepository
+import com.catchallenge.repository.cache.CatCacheRepository
+import com.catchallenge.repository.cache.CatRoomRepository
 import com.catchallenge.repository.thecatapi.TheCatApiRepositoryV1
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Qualifier
@@ -39,12 +42,16 @@ object RepositoryModule {
             .build()
     }
 
-    @ViewModelScoped
     @Provides
     fun provideCatRepository(
         @TheCatApiOkHttpClient okHttpClient: OkHttpClient
     ): CatRepository {
         return TheCatApiRepositoryV1("https://api.thecatapi.com/v1/", okHttpClient)
+    }
+
+    @Provides
+    fun provideCatCacheRepository(@ApplicationContext appContext: Context): CatCacheRepository {
+        return CatRoomRepository(appContext)
     }
 }
 
