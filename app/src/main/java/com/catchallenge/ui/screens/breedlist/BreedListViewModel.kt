@@ -43,6 +43,7 @@ class BreedListViewModel @Inject constructor(
                 //clear cached data and insert.
                 //a bit of a raw way to sync the cached data, but it works
                 //TODO: maybe write the cache in parallel to avoid further delay in presenting the data to the user
+                //TODO: the cache should take care of data synchronization, not the viewmodel
                 catCacheRepository.removeAllBreeds()
                 catCacheRepository.insertBreeds(breedList)
 
