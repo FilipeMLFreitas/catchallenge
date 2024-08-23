@@ -43,6 +43,16 @@ android {
         viewBinding = true
         compose = true
     }
+
+    packaging {
+        //fix issue with instrumented tests: "files found with path 'META-INF/LICENSE.md'"
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+            )
+        )
+    }
 }
 
 dependencies {
@@ -91,8 +101,19 @@ dependencies {
     //TODO: use ksp instead, and move version to the catalog
     kapt("androidx.room:room-compiler:2.6.1")
 
-    // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.agent)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.agent)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
 
 kapt {
