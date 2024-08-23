@@ -21,8 +21,10 @@ class BreedListViewModel @Inject constructor(
     val breedListStateFlow = _breedListStateFlow.asStateFlow()
 
     fun getBreeds() {
+        //TODO: dispatchers should be injected to make it easier for testing
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                //let's see if we have the data cached already
                 val cachedBreeds = catCacheRepository.getBreeds()
 
                 if (cachedBreeds.isNotEmpty()) {
@@ -34,7 +36,13 @@ class BreedListViewModel @Inject constructor(
                     return@launch
                 }
 
+                //data not cached, fetch it from the network
                 val breedList = catRepository.getBreeds()
+
+                //clear cached data and insert.
+                //a bit of a raw way to sync the cached data, but it works
+                //TODO: maybe write the cache in parallel to avoid further delay in presenting the data to the user
+                catCacheRepository.removeAllBreeds()
                 catCacheRepository.insertBreeds(breedList)
 
                 val state =

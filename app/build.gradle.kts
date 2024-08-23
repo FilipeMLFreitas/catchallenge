@@ -24,6 +24,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "CATAPIKEY", "\"${properties["CATAPIKEY"]}\"")
+            buildConfigField("String", "CATAPIURL", "\"${properties["CATAPIURL"]}\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -42,6 +46,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
 
     packaging {

@@ -13,6 +13,7 @@ class TheCatApiRepositoryV1(
 ) :
     CatRepository {
     private val api: RepositoryContract by lazy {
+        //TODO: maybe have RetrofitApiBuilder injected to make it easier for testing
         RetrofitApiBuilder().createApi(
             baseUrl,
             RepositoryContract::class.java,

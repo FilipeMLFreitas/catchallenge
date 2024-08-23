@@ -18,6 +18,7 @@ class RetrofitApiBuilder {
     ): T {
 
         val networkJson = Json {
+            //these properties make deserialization more flexible (such as with null values)
             ignoreUnknownKeys = true
             explicitNulls = false
         }

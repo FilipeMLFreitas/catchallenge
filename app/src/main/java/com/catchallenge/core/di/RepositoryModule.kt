@@ -1,6 +1,7 @@
 package com.catchallenge.core.di
 
 import android.content.Context
+import com.catchallenge.BuildConfig
 import com.catchallenge.repository.CatRepository
 import com.catchallenge.repository.cache.CatCacheRepository
 import com.catchallenge.repository.cache.CatRoomRepository
@@ -29,16 +30,17 @@ object RepositoryModule {
             .addInterceptor { chain ->
                 chain.request().newBuilder()
                     //TODO: actually, the auth method of the repository shouldn't be knowledge of such a top level place such as this. need to find a way to have the TheCatApiRepository set it somehow
-                    //TODO: move api key out (yes, i know this shouldn't be commited, but time is of the essence..)
                     .addHeader(
                         "x-api-key",
-                        "live_0g89soDp3vfWBtym141PXnmK709047GVULI5n0Hrq2tSxtTBYfevqeGlwRnAJhyR"
+                        BuildConfig.CATAPIKEY
                     )
+                    //TODO: maybe set certificate pinning for higher security
                     .build()
                     .let(chain::proceed)
+            }.also {
+                if (BuildConfig.DEBUG)
+                    it.addInterceptor(loggingInterceptor)
             }
-            //TODO: only log for debug builds
-            .addInterceptor(loggingInterceptor)
             .build()
     }
 
@@ -46,11 +48,13 @@ object RepositoryModule {
     fun provideCatRepository(
         @TheCatApiOkHttpClient okHttpClient: OkHttpClient
     ): CatRepository {
-        return TheCatApiRepositoryV1("https://api.thecatapi.com/v1/", okHttpClient)
+        //we'll use TheCatApi for our cat source
+        return TheCatApiRepositoryV1(BuildConfig.CATAPIURL, okHttpClient)
     }
 
     @Provides
     fun provideCatCacheRepository(@ApplicationContext appContext: Context): CatCacheRepository {
+        //we'll use a cache based on the room database
         return CatRoomRepository(appContext)
     }
 }

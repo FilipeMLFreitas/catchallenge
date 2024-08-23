@@ -4,7 +4,7 @@ import com.catchallenge.model.Breed
 import com.catchallenge.repository.cache.catroom.entities.BreedEntity
 import com.catchallenge.repository.util.Mapper
 
-object fromBreedEntityMapping : Mapper<BreedEntity, Breed> {
+object FromBreedEntityMapping : Mapper<BreedEntity, Breed> {
     override fun map(from: BreedEntity): Breed {
         return Breed(
             id = from.id,
@@ -17,7 +17,7 @@ object fromBreedEntityMapping : Mapper<BreedEntity, Breed> {
     }
 }
 
-object toBreedEntityMapping : Mapper<Breed, BreedEntity> {
+object ToBreedEntityMapping : Mapper<Breed, BreedEntity> {
     override fun map(from: Breed): BreedEntity {
         return BreedEntity(
             id = from.id,
