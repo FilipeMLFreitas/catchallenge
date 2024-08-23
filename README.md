@@ -38,7 +38,7 @@ I used Hilt to inject high level dependencies.
 
 In some components, simply for hastened development purposes, I didn't use injection but I marked those places with TODOs. 
 
-This is important because it would make those components more flexible, less coupled, and more testable.
+Using injection is important because it would make those components more flexible, less coupled, and more testable.
 
 About the viewmodels, I also would move the business logic into something like Use Cases. Maybe like it's described here: https://medium.com/@benmansour1992/android-use-cases-hell-in-mvvm-architecture-43a45ca41df4
 
