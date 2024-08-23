@@ -26,4 +26,8 @@ class CatRoomRepository(context: Context) : CatCacheRepository {
             roomDatabase.catDao().insert(toBreedEntityMapping.map(breed))
         }
     }
+
+    override suspend fun removeAllBreeds() {
+        roomDatabase.catDao().deleteAll()
+    }
 }

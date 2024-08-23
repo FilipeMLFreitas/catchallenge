@@ -5,20 +5,25 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.catchallenge.ui.screens.BreedListScreen
+import com.catchallenge.ui.screens.breeddetail.BreedDetailScreen
+import com.catchallenge.ui.screens.breedlist.BreedListScreen
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost( //
+    NavHost(
         navController = navController,
         startDestination = "breeds"
     ) {
         breeds(
             route = "breeds",
             onBreedClick = {
-                //TODO: navigate
+                navController.navigate(route = "breeds/$it")
             }
+        )
+
+        breedDetail(
+            route = "breeds/{Id}",
         )
     }
 }
@@ -32,4 +37,16 @@ fun NavGraphBuilder.breeds(
     BreedListScreen(
         onBreedClick = onBreedClick
     )
+}
+
+fun NavGraphBuilder.breedDetail(
+    route: String,
+) = composable(
+    route = route
+) { navBackStackEntry ->
+    val breedId = navBackStackEntry.arguments?.getString("Id")
+
+    requireNotNull(breedId) { "breed id required" }
+
+    BreedDetailScreen(breedId)
 }

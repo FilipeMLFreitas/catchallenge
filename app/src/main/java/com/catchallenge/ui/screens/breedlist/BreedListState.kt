@@ -1,4 +1,4 @@
-package com.catchallenge.ui.screens
+package com.catchallenge.ui.screens.breedlist
 
 import com.catchallenge.model.Breed
 

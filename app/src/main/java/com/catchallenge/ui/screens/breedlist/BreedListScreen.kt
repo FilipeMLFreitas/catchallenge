@@ -1,4 +1,4 @@
-package com.catchallenge.ui.screens
+package com.catchallenge.ui.screens.breedlist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
