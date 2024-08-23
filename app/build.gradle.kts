@@ -81,12 +81,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
-    implementation(libs.okhttp)
-    implementation(libs.retrofitcore)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(project(":repositories"))
+    implementation(project(":model"))
 
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.converter.kotlinx.serialization)
     implementation(libs.okhttp.logging)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -119,6 +116,8 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
 }
 
 kapt {

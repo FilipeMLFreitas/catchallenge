@@ -2,8 +2,9 @@ package com.catchallenge.ui.screens.breedlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.catchallenge.repository.CatRepository
-import com.catchallenge.repository.cache.CatCacheRepository
+import com.catchallenge.repositories.CatRepository
+import com.catchallenge.repositories.cache.CatCacheRepository
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

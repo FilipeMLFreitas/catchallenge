@@ -2,10 +2,10 @@ package com.catchallenge.core.di
 
 import android.content.Context
 import com.catchallenge.BuildConfig
-import com.catchallenge.repository.CatRepository
-import com.catchallenge.repository.cache.CatCacheRepository
-import com.catchallenge.repository.cache.CatRoomRepository
-import com.catchallenge.repository.thecatapi.TheCatApiRepositoryV1
+import com.catchallenge.repositories.CatRepository
+import com.catchallenge.repositories.cache.CatCacheRepository
+import com.catchallenge.repositories.cache.CatRoomRepository
+import com.catchallenge.repositories.thecatapi.TheCatApiRepositoryV1
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

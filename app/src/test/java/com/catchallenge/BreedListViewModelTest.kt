@@ -29,7 +29,7 @@ class BreedListViewModelTest {
 
     @Test
     fun `test get breeds with success returning a non empty list from cache`() = runTest {
-        val breedList = listOf(mockk<Breed>(), mockk<Breed>())
+        val breedList = listOf(mockk<com.catchallenge.model.Breed>(), mockk<com.catchallenge.model.Breed>())
 
         coEvery { catCacheRepository.getBreeds() } returns breedList
 
@@ -49,7 +49,7 @@ class BreedListViewModelTest {
 
     @Test
     fun `test get breeds with success returning a non empty list from the network`() = runTest {
-        val breedList = listOf(mockk<Breed>(), mockk<Breed>())
+        val breedList = listOf(mockk<com.catchallenge.model.Breed>(), mockk<com.catchallenge.model.Breed>())
 
         coEvery { catCacheRepository.getBreeds() } returns emptyList()
         coEvery { catRepository.getBreeds() } returns breedList
@@ -71,7 +71,7 @@ class BreedListViewModelTest {
 
     @Test
     fun `test get breeds with network failure`() = runTest {
-        val breedList = listOf(mockk<Breed>(), mockk<Breed>())
+        val breedList = listOf(mockk<com.catchallenge.model.Breed>(), mockk<com.catchallenge.model.Breed>())
 
         coEvery { catCacheRepository.getBreeds() } returns emptyList()
         coEvery { catRepository.getBreeds() } throws Exception()

@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "CatChallenge"
 include(":app")
- 
+include(":repositories")
+include(":model")
