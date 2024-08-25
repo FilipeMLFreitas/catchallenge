@@ -36,7 +36,9 @@ Some further thoughts:
 
 I used Hilt to inject high level dependencies. 
 
-In some components, simply for hastened development purposes, I didn't use injection but I marked those places with TODOs. 
+In some components, simply for hastened development purposes, I didn't use constructor injection for dependencies but I marked those places with TODOs.
+
+By injection, I don't mean injecting with Hilt or something, instead I mean an internal constructor where you can provide the internal dependencies for mocking in unit tests. I believe these dependencies are specific knowledge to that specific componnent, not something like a Hilt component should know. For example, for the TheCatApi repository, only the repository should know that it uses retrofit, therefore it's not something provided externally.
 
 Using injection is important because it would make those components more flexible, less coupled, and more testable.
 
